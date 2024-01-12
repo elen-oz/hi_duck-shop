@@ -19,7 +19,7 @@ const Item = ({ name, price, image, onAdd, description }: Props) => {
       </p>
       {description && <p>Description: {description}</p>}
       <button
-        className="border-accentSecond hover:bg-accentSecond rounded border py-1 transition duration-300 ease-in-out "
+        className="border-accentSecond hover:bg-accentSecond rounded border py-1 transition duration-300 ease-in-out hover:text-white "
         onClick={onAdd}
       >
         + Add to cart

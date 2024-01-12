@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-main text-l flex justify-center p-2 text-white">
+    <footer className="bg-main  text-l mt-3 flex justify-center p-2 text-white">
       <a
         className="text-accentSecond hover:underline"
         href="https://github.com/elen-oz/hi_duck-shop"

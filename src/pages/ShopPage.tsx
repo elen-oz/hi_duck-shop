@@ -8,7 +8,7 @@ interface Props {
 
 const ShopPage = ({ onAdd }: Props) => {
   return (
-    <div className="mx-auto flex w-[47rem] flex-wrap justify-center">
+    <div className="mx-auto flex max-w-[47rem] flex-wrap justify-center">
       {products.map((product) => {
         const { name, price, image, id } = product;
 
