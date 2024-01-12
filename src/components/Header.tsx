@@ -6,7 +6,7 @@ interface Props {
 
 const Header = ({ cartItems }: Props) => {
   return (
-    <header className="flex justify-between">
+    <header className="bg-main flex justify-between p-4 text-3xl text-white">
       <h2>Duck Shop</h2>
       <Cart cartItems={cartItems} />
     </header>
