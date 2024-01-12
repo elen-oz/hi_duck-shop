@@ -8,7 +8,7 @@ interface Props {
 
 const MainWrapperPage = ({ cartItems }: Props) => {
   return (
-    <div className="h-screen">
+    <div className="flex h-screen flex-col justify-between">
       <Header cartItems={cartItems} />
       <Outlet />
       <Footer />

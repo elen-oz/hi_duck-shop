@@ -8,13 +8,22 @@ interface Props {
 
 const Item = ({ name, price, image, onAdd, description }: Props) => {
   return (
-    <div className="w-[220px] p-[10px]">
-      <img src={image} alt={name} />
-      <p>
-        {name} - {price}
+    <div className=" flex h-[19rem] w-[14rem] flex-col justify-between p-[1rem]">
+      <img
+        className="transform transition-transform hover:scale-105"
+        src={image}
+        alt={name}
+      />
+      <p className="">
+        {name} - {price} SEK
       </p>
       {description && <p>Description: {description}</p>}
-      <button onClick={onAdd}>+ Add to cart</button>
+      <button
+        className="border-accentSecond hover:bg-accentSecond rounded border py-1 transition duration-300 ease-in-out "
+        onClick={onAdd}
+      >
+        + Add to cart
+      </button>
     </div>
   );
 };

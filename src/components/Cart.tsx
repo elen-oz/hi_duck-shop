@@ -3,6 +3,6 @@ interface Props {
 }
 
 const Cart = ({ cartItems }: Props) => {
-  return <div>Cart ({cartItems})</div>;
+  return <div className="text-xl">Cart ({cartItems})</div>;
 };
 export default Cart;
