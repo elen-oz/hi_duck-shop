@@ -3,7 +3,7 @@ import { products } from "../data";
 import Item from "../components/Item";
 
 interface Props {
-  onAdd: () => void;
+  onAdd: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ShopPage = ({ onAdd }: Props) => {

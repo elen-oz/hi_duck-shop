@@ -3,7 +3,7 @@ interface Props {
   price: number;
   image: string;
   description?: string;
-  onAdd: () => void;
+  onAdd: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Item = ({ name, price, image, onAdd, description }: Props) => {

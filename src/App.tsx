@@ -6,7 +6,11 @@ import { useState } from "react";
 const App = () => {
   const [cartItems, setCartItems] = useState(0);
 
-  const handleAddToCart = (): void => {
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ): void => {
+    event.preventDefault();
+
     const newItemCount = cartItems + 1;
     setCartItems(newItemCount);
   };
