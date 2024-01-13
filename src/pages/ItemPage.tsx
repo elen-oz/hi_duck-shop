@@ -19,6 +19,9 @@ const ItemPage = ({ onAdd }: Props) => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
+    console.log({ id, name, price, image, onAdd });
+
     onAdd(event, item);
   };
 
