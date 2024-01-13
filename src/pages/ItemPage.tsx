@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { products } from "../data";
-import { Product } from "../App";
+import { OnAddHandler } from "../App";
 
 interface Props {
-  onAdd: (event: React.MouseEvent<HTMLButtonElement>, product: Product) => void;
+  onAdd: OnAddHandler;
 }
 
 const ItemPage = ({ onAdd }: Props) => {

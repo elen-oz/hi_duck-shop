@@ -1,18 +1,10 @@
 import { Link } from "react-router-dom";
 import { products } from "../data";
 import Item from "../components/Item";
-import { Product } from "../App";
-
-// interface Product {
-//   id: number;
-//   name: string;
-//   price: number;
-//   image: string;
-//   description?: string;
-// }
+import { OnAddHandler } from "../App";
 
 interface Props {
-  onAdd: (event: React.MouseEvent<HTMLButtonElement>, product: Product) => void;
+  onAdd: OnAddHandler;
 }
 
 const ShopPage = ({ onAdd }: Props) => {

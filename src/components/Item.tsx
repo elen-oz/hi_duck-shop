@@ -1,4 +1,4 @@
-import { Product } from "../App";
+import { OnAddHandler } from "../App";
 
 interface Props {
   id: number;
@@ -6,7 +6,7 @@ interface Props {
   price: number;
   image: string;
   description?: string;
-  onAdd: (event: React.MouseEvent<HTMLButtonElement>, product: Product) => void;
+  onAdd: OnAddHandler;
 }
 
 const Item = ({ id, name, price, image, onAdd }: Props) => {

@@ -12,13 +12,15 @@ export interface Product {
   description?: string;
 }
 
+export type OnAddHandler = (
+  event: React.MouseEvent<HTMLButtonElement>,
+  product: Product,
+) => void;
+
 const App = () => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
 
-  const handleAddToCart = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    product: Product,
-  ): void => {
+  const handleAddToCart: OnAddHandler = (event, product): void => {
     event.preventDefault();
 
     setCartItems((prevItems) => [...prevItems, product]);
