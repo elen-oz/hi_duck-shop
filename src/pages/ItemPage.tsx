@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import { products } from "../data";
+import { Product } from "../App";
 
 interface Props {
-  handleAddToCart: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onAdd: (event: React.MouseEvent<HTMLButtonElement>, product: Product) => void;
 }
 
-const ItemPage = ({ handleAddToCart }: Props) => {
+const ItemPage = ({ onAdd }: Props) => {
   const { id } = useParams();
-  console.log(id);
 
   const item = products.find((item) => {
     return item.id === +id;
@@ -16,6 +16,11 @@ const ItemPage = ({ handleAddToCart }: Props) => {
   if (!item) return <div>Item not found</div>;
 
   const { name, price, description, image } = item;
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onAdd(event, item);
+  };
 
   return (
     <div className=" flex grid-flow-col grid-rows-2 flex-col items-center justify-center  justify-items-center gap-4 px-4 md:grid">
@@ -30,7 +35,7 @@ const ItemPage = ({ handleAddToCart }: Props) => {
       )}
       <button
         className="col-span-1 rounded border border-accentSecond px-4 py-1 transition duration-300 ease-in-out hover:bg-accentSecond hover:text-white "
-        onClick={handleAddToCart}
+        onClick={handleClick}
       >
         + Add to cart
       </button>

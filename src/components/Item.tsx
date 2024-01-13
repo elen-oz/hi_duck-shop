@@ -1,12 +1,20 @@
+import { Product } from "../App";
+
 interface Props {
+  id: number;
   name: string;
   price: number;
   image: string;
   description?: string;
-  onAdd: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onAdd: (event: React.MouseEvent<HTMLButtonElement>, product: Product) => void;
 }
 
-const Item = ({ name, price, image, onAdd, description }: Props) => {
+const Item = ({ id, name, price, image, onAdd }: Props) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onAdd(event, { id, name, price, image });
+  };
+
   return (
     <div className=" flex h-[19rem] w-[14rem] flex-col justify-between p-[1rem]">
       <img
@@ -17,10 +25,9 @@ const Item = ({ name, price, image, onAdd, description }: Props) => {
       <p className="">
         {name} - {price} SEK
       </p>
-      {description && <p>Description: {description}</p>}
       <button
-        className="border-accentSecond hover:bg-accentSecond rounded border py-1 transition duration-300 ease-in-out hover:text-white "
-        onClick={onAdd}
+        className="rounded border border-accentSecond py-1 transition duration-300 ease-in-out hover:bg-accentSecond hover:text-white "
+        onClick={handleClick}
       >
         + Add to cart
       </button>

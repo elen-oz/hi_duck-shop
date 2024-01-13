@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
+import { Product } from "../App";
 
 interface Props {
-  cartItems: number;
+  cartItems: Product[];
 }
 
 const Header = ({ cartItems }: Props) => {

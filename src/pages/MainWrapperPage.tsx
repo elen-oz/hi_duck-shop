@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Product } from "../App";
 
 interface Props {
-  cartItems: number;
+  cartItems: Product[];
 }
 
 const MainWrapperPage = ({ cartItems }: Props) => {

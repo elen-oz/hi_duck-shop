@@ -4,16 +4,24 @@ import ShopPage from "./pages/ShopPage";
 import { useState } from "react";
 import ItemPage from "./pages/ItemPage";
 
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  description?: string;
+}
+
 const App = () => {
-  const [cartItems, setCartItems] = useState(0);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   const handleAddToCart = (
     event: React.MouseEvent<HTMLButtonElement>,
+    product: Product,
   ): void => {
     event.preventDefault();
 
-    const newItemCount = cartItems + 1;
-    setCartItems(newItemCount);
+    setCartItems((prevItems) => [...prevItems, product]);
   };
 
   return (
@@ -23,7 +31,7 @@ const App = () => {
           <Route index element={<ShopPage onAdd={handleAddToCart} />} />
           <Route
             path="/product/:id"
-            element={<ItemPage handleAddToCart={handleAddToCart} />}
+            element={<ItemPage onAdd={handleAddToCart} />}
           />
         </Route>
       </Routes>
