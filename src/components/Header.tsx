@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Cart from "./Cart";
 
 interface Props {
@@ -6,10 +7,12 @@ interface Props {
 
 const Header = ({ cartItems }: Props) => {
   return (
-    <header className="bg-main flex justify-between px-8 py-4 text-white">
-      <h2 className="text-3xl">
-        <span className="text-accent">Duck</span> Shop
-      </h2>
+    <header className="flex justify-between bg-main px-8 py-4 text-white">
+      <Link to="/">
+        <h2 className="text-3xl">
+          <span className="text-accent">Duck</span> Shop
+        </h2>
+      </Link>
       <Cart cartItems={cartItems} />
     </header>
   );
