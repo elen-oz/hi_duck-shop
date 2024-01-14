@@ -23,6 +23,8 @@ const defaultCartState: CartState = {
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   let updatedItems;
+  let itemToRemove;
+  let updatedAmount: number;
 
   switch (action.type) {
     case "ADD":
@@ -43,8 +45,24 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
           (action.payload.amount || 1) * action.payload.price,
       };
     case "REMOVE":
-      //todo: change later
-      return defaultCartState;
+      itemToRemove = state.items.find((item) => item.id === action.payload);
+
+      if (itemToRemove && itemToRemove.amount) {
+        updatedAmount =
+          itemToRemove?.amount === 1 ? 0 : itemToRemove?.amount - 1;
+        updatedItems = state.items
+          .map((item) =>
+            item.id === action.payload
+              ? { ...item, amount: updatedAmount }
+              : item,
+          )
+          .filter((item) => (item.amount || 0) > 0);
+        return {
+          items: updatedItems,
+          totalAmount: state.totalAmount - itemToRemove.price,
+        };
+      }
+      return state;
 
     case "CLEAR":
       return defaultCartState;
