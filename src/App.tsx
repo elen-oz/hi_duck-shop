@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import { products } from "./data";
+
 import MainWrapperPage from "./pages/MainWrapperPage";
 import ShopPage from "./pages/ShopPage";
-import { useState } from "react";
-import { products } from "./data";
 import ItemPage from "./pages/ItemPage";
 
 export interface Product {
@@ -41,8 +43,6 @@ const App = () => {
     } else {
       setCartItems((prevItems) => [...prevItems, { ...product, amount: 1 }]);
     }
-
-    console.log("cartItems:", cartItems);
   };
 
   const handleToggleCart = () => {
