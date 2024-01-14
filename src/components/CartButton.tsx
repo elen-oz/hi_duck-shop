@@ -28,6 +28,9 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
           "text-xl",
           "hover:border-b-2",
           "hover:text-accent",
+          "transition",
+          "duration-300",
+          "ease-in-out",
           toggledCart,
         )}
         onClick={() => onToggleCart()}
@@ -38,6 +41,7 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
       {cartVisibility && (
         <div className="absolute right-0 top-12 z-10 w-[200px] rounded-sm  bg-main p-4 ">
           <ul>
+            {cartItems.length === 0 && <p>Cart is empty</p>}
             {cartItems.map((item) => (
               <li key={item.id} className="pt-2">
                 {item.amount &&
@@ -47,7 +51,7 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
               </li>
             ))}
           </ul>
-          <p className="pt-4 font-bold text-accent">{`Total Price: ${totalPrice} SEK`}</p>
+          <p className="pt-4 font-bold text-accent">{`Total payable: ${totalPrice} SEK`}</p>
         </div>
       )}
     </div>
