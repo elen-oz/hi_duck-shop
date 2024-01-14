@@ -1,17 +1,23 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import { Product, OnAddHandler } from "../App";
 import AddButton from "../UI/AddButtonA";
-// import CartContext from "../context/cartContext";
+import CartContext from "../context/cartContext";
 
-type ItemProps = Omit<Product, "description"> & {
-  onAdd: OnAddHandler;
-};
+interface ItemProps {
+  product: Product;
+}
 
-const Item = (product: ItemProps) => {
-  const { id, name, price, image, amount, onAdd } = product;
-  // const cartCtx = useContext(CartContext)
+const Item = ({ product }: ItemProps) => {
+  const { name, price, image } = product;
+  const cartCtx = useContext(CartContext);
 
-  
+  const addToCartHandler: OnAddHandler = (event, item) => {
+    event.preventDefault();
+
+    if (cartCtx) {
+      cartCtx.addItem({ ...item, amount: 1 });
+    }
+  };
 
   return (
     <div className=" flex h-[19rem] w-[14rem] flex-col justify-between p-[1rem]">
@@ -25,12 +31,8 @@ const Item = (product: ItemProps) => {
       </p>
 
       <AddButton
-        id={id}
-        name={name}
-        price={price}
-        image={image}
-        amount={amount}
-        onAdd={(event) => onAdd(event, product)}
+        product={product}
+        onAdd={(event) => addToCartHandler(event, product)}
       >
         + Add to cart
       </AddButton>

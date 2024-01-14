@@ -4,18 +4,14 @@ import CartContext from "../context/cartContext";
 import { Product } from "../App";
 
 interface Props {
-  cartItems: Product[];
   cartVisibility: boolean;
   onToggleCart: () => void;
 }
 
-const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
+const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
   const cartCtx = useContext(CartContext);
 
-  //todo: items => cartItems
-  const { items } = cartCtx;
-  console.log("items", items);
-  console.log("cartItems", cartItems);
+  const cartItems = cartCtx?.items || [];
 
   const totalAmount = cartItems.reduce(
     (acc, item) => acc + (item.amount || 0),
@@ -29,14 +25,20 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
 
   const toggledCart = cartVisibility ? "text-accentSecond" : "text-white";
 
-  const cartItemAddHandler = (item) => {
-    cartCtx.addItem({ ...item, amount: 1 });
+  const cartItemAddHandler = (item: Product) => {
+    if (cartCtx) {
+      cartCtx.addItem({ ...item, amount: 1 });
+    }
   };
-  const cartItemRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
+  const cartItemRemoveHandler = (id: number) => {
+    if (cartCtx) {
+      cartCtx.removeItem(id);
+    }
   };
   const clearCartHandler = () => {
-    cartCtx.clearCart();
+    if (cartCtx) {
+      cartCtx.clearCart();
+    }
   };
 
   return (
@@ -72,13 +74,13 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
                 <span>
                   <button
                     className="mr-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800"
-                    onClick={cartItemAddHandler}
+                    onClick={() => cartItemAddHandler(item)}
                   >
                     +
                   </button>
                   <button
                     className=" ml-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800"
-                    onClick={cartItemRemoveHandler}
+                    onClick={() => cartItemRemoveHandler(item.id)}
                   >
                     -
                   </button>

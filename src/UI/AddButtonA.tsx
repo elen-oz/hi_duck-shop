@@ -1,19 +1,15 @@
 import { OnAddHandler, Product } from "../App";
 
-type ItemProps = Omit<Product, "description"> & {
+// type ItemProps = Omit<Product, "description"> & {
+type ItemProps = {
+  product: Product;
   onAdd: OnAddHandler;
   children: string;
 };
 
-const AddButton = ({
-  children,
-  id,
-  name,
-  price,
-  image,
-  amount,
-  onAdd,
-}: ItemProps) => {
+const AddButton = ({ children, product, onAdd }: ItemProps) => {
+  const { id, name, price, image, amount } = product;
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
