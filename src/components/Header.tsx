@@ -15,8 +15,17 @@ const Header = ({ cartVisibility, onToggleCart }: Props) => {
     <header className="w-full bg-main ">
       <div className="mx-auto flex justify-between px-8 py-4 text-white md:container">
         <Link to="/">
-          <h2 className="transform text-3xl transition-transform hover:scale-105">
-            <span className="text-accentSecond">&rang;Duck</span> Shop
+          {/* <h2 className="relative text-3xl transition-transform hover:translate-x-3">
+            <span className="inline-block text-accentSecond ">&rang;</span>
+            <span className="text-accentSecond">Duck</span>
+            &nbsp;Shop
+          </h2> */}
+          <h2 className="relative text-3xl">
+            <span className="absolute left-[-1.7rem] top-0 inline-block w-[142px] text-accentSecond transition-transform hover:translate-x-3 ">
+              &rang;
+            </span>
+            <span className="text-accentSecond">Duck</span>
+            &nbsp;Shop
           </h2>
         </Link>
         <div className="flex w-[13rem] justify-between">
