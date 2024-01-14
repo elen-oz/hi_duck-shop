@@ -10,8 +10,6 @@ const ShopPage = ({ items }: Props) => {
   return (
     <div className="mx-auto flex max-w-[47rem] flex-wrap justify-center">
       {items.map((product) => {
-        // const { name, price, image, id, amount } = product;
-
         return (
           <Link to={`/product/${product.id}`} key={product.id}>
             <Item product={product} />

@@ -10,7 +10,6 @@ interface CartState {
 interface CartAction {
   type: string;
   payload?: any;
-  // payload?: Product | number;
 }
 
 interface CartProviderProps {

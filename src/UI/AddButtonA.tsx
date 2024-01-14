@@ -1,6 +1,5 @@
 import { OnAddHandler, Product } from "../App";
 
-// type ItemProps = Omit<Product, "description"> & {
 type ItemProps = {
   product: Product;
   onAdd: OnAddHandler;

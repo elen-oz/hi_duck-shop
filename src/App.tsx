@@ -25,26 +25,7 @@ export type OnAddHandler = (
 const items = products.map((product) => ({ ...product, amount: 0 }));
 
 const App = () => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
   const [isCartVisible, setCartVisibility] = useState(false);
-
-  // const handleAddToCart: OnAddHandler = (event, product): void => {
-  //   event.preventDefault();
-
-  //   const existingProduct = cartItems.find((item) => item.id === product.id);
-
-  //   if (existingProduct !== undefined) {
-  //     setCartItems((prevItems) =>
-  //       prevItems.map((item) =>
-  //         item.id === product.id
-  //           ? { ...item, amount: (item.amount || 0) + 1 }
-  //           : item,
-  //       ),
-  //     );
-  //   } else {
-  //     setCartItems((prevItems) => [...prevItems, { ...product, amount: 1 }]);
-  //   }
-  // };
 
   const handleToggleCart = () => {
     setCartVisibility((prevVisibility) => !prevVisibility);
@@ -58,7 +39,6 @@ const App = () => {
             path="/"
             element={
               <MainWrapperPage
-                cartItems={cartItems}
                 cartVisibility={isCartVisible}
                 onToggleCart={handleToggleCart}
               />
