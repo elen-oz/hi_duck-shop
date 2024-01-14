@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { Product } from "../App";
 
 interface Props {
@@ -17,9 +18,20 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
     0,
   );
 
+  const toggledCart = cartVisibility ? "text-accentSecond" : "text-white";
+
   return (
     <div className="relative">
-      <button className="text-xl" onClick={() => onToggleCart()}>
+      <button
+        className={classNames(
+          "rounded-sm",
+          "text-xl",
+          "hover:border-b-2",
+          "hover:text-accent",
+          toggledCart,
+        )}
+        onClick={() => onToggleCart()}
+      >
         Cart ({totalAmount})
       </button>
 
