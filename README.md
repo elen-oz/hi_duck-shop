@@ -2,7 +2,7 @@
 
 ## `React` / `TypeScript` / `Tailwind` / `Vite`
 
-[Link To See](https://hi-duck-shop-eff143jdb-elen-oz.vercel.app/)
+**[See Demo](https://hi-duck-shop.vercel.app/)**
 
 ## Setup and Installation
 
