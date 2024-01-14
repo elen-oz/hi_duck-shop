@@ -19,11 +19,6 @@ const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
     0,
   );
 
-  // const totalPrice = cartItems.reduce(
-  //   (acc, item) => acc + (item.amount || 0) * item.price,
-  //   0,
-  // );
-
   const toggledCart = cartVisibility ? "text-accentSecond" : "text-white";
 
   const cartItemAddHandler = (item: Product) => {
@@ -47,7 +42,7 @@ const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
       <button
         className={classNames(
           "rounded-sm",
-          "text-xl",
+          "text-[1.2rem]",
           "hover:border-b-2",
           "hover:text-accent",
           "transition",
