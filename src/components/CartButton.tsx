@@ -12,16 +12,17 @@ const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
   const cartCtx = useContext(CartContext);
 
   const cartItems = cartCtx?.items || [];
+  const totalPrice = cartCtx?.totalAmount || 0;
 
-  const totalAmount = cartItems.reduce(
+  const totalQuantity = cartItems.reduce(
     (acc, item) => acc + (item.amount || 0),
     0,
   );
 
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + (item.amount || 0) * item.price,
-    0,
-  );
+  // const totalPrice = cartItems.reduce(
+  //   (acc, item) => acc + (item.amount || 0) * item.price,
+  //   0,
+  // );
 
   const toggledCart = cartVisibility ? "text-accentSecond" : "text-white";
 
@@ -56,7 +57,7 @@ const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
         )}
         onClick={() => onToggleCart()}
       >
-        Cart ({totalAmount})
+        Cart ({totalQuantity})
       </button>
 
       {cartVisibility && (
