@@ -1,15 +1,12 @@
 import { Product, OnAddHandler } from "../App";
+import AddButton from "../UI/AddButtonA";
 
 type ItemProps = Omit<Product, "description"> & {
   onAdd: OnAddHandler;
 };
 
-const Item = ({ id, name, price, image, amount, onAdd }: ItemProps) => {
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    onAdd(event, { id, name, price, image, amount });
-  };
+const Item = (product: ItemProps) => {
+  const { id, name, price, image, amount, onAdd } = product;
 
   return (
     <div className=" flex h-[19rem] w-[14rem] flex-col justify-between p-[1rem]">
@@ -21,12 +18,17 @@ const Item = ({ id, name, price, image, amount, onAdd }: ItemProps) => {
       <p className="">
         {name} - {price} SEK
       </p>
-      <button
-        className="rounded border border-accentSecond py-1 transition duration-300 ease-in-out hover:bg-accentSecond hover:text-white "
-        onClick={handleClick}
+
+      <AddButton
+        id={id}
+        name={name}
+        price={price}
+        image={image}
+        amount={amount}
+        onAdd={(event) => onAdd(event, product)}
       >
         + Add to cart
-      </button>
+      </AddButton>
     </div>
   );
 };

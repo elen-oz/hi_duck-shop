@@ -24,7 +24,7 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
       </button>
 
       {cartVisibility && (
-        <div className="absolute right-0 top-12 z-10 w-[200px]  bg-main p-4 ">
+        <div className="absolute right-0 top-12 z-10 w-[200px] rounded-sm  bg-main p-4 ">
           <ul>
             {cartItems.map((item) => (
               <li key={item.id} className="pt-2">

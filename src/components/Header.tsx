@@ -14,7 +14,7 @@ const Header = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
       <div className="mx-auto flex justify-between px-8 py-4 text-white md:container">
         <Link to="/">
           <h2 className="text-3xl">
-            <span className="text-accent">Duck</span> Shop
+            <span className="text-accentSecond">Duck</span> Shop
           </h2>
         </Link>
         <CartButton

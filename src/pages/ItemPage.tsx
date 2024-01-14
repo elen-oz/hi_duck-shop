@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { OnAddHandler, Product } from "../App";
+import AddButton from "../UI/AddButtonA";
 
 interface Props {
   items: Product[];
@@ -18,13 +19,7 @@ const ItemPage = ({ items, onAdd }: Props) => {
 
   if (!item) return <div>Item not found</div>;
 
-  const { name, price, description, image } = item;
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    onAdd(event, item);
-  };
+  const { name, price, description, image, amount } = item;
 
   return (
     <div className=" flex grid-flow-col grid-rows-2 flex-col items-center justify-center  justify-items-center gap-4 px-4 md:grid">
@@ -37,12 +32,17 @@ const ItemPage = ({ items, onAdd }: Props) => {
           Description: {description}
         </p>
       )}
-      <button
-        className="col-span-1 rounded border border-accentSecond px-4 py-1 transition duration-300 ease-in-out hover:bg-accentSecond hover:text-white "
-        onClick={handleClick}
+
+      <AddButton
+        id={id}
+        name={name}
+        price={price}
+        image={image}
+        amount={amount}
+        onAdd={(event) => onAdd(event, item)}
       >
         + Add to cart
-      </button>
+      </AddButton>
     </div>
   );
 };
