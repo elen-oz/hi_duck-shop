@@ -55,19 +55,34 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
       </button>
 
       {cartVisibility && (
-        <div className="absolute right-0 top-12 z-10 w-[200px] rounded-sm  bg-main p-4 ">
+        <div className="absolute right-0 top-12 z-10 w-[330px] rounded-sm  bg-main p-4 ">
           <ul>
             {cartItems.length === 0 && <p>Cart is empty</p>}
             {cartItems.map((item) => (
-              <li key={item.id} className="pt-2">
-                {item.amount &&
-                  `${item.name} x ${item.amount} - ${item.price * item.amount} SEK`}
+              <li key={item.id} className="flex justify-between pt-2">
+                <span>
+                  {item.amount &&
+                    `${item.name} x ${item.amount} - ${item.price * item.amount} SEK`}
 
-                {!item.amount && `${item.name} x 1 - ${item.price} SEK`}
+                  {!item.amount && `${item.name} x 1 - ${item.price} SEK`}
+                </span>
+                <span>
+                  <button className="mr-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800">
+                    +
+                  </button>
+                  <button className=" ml-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800">
+                    -
+                  </button>
+                </span>
               </li>
             ))}
           </ul>
-          <p className="pt-4 font-bold text-accent">{`Total payable: ${totalPrice} SEK`}</p>
+          <div className="flex justify-between pt-4 ">
+            <p className="font-bold text-accent">{`Total payable: ${totalPrice} SEK`}</p>
+            <button className="rounded-sm bg-zinc-800 px-4 hover:bg-zinc-900">
+              Clear
+            </button>
+          </div>
         </div>
       )}
     </div>
