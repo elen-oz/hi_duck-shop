@@ -35,6 +35,9 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
   const cartItemRemoveHandler = (id) => {
     cartCtx.removeItem(id);
   };
+  const clearCartHandler = () => {
+    cartCtx.clearCart();
+  };
 
   return (
     <div className="relative">
@@ -67,10 +70,16 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
                   {!item.amount && `${item.name} x 1 - ${item.price} SEK`}
                 </span>
                 <span>
-                  <button className="mr-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800">
+                  <button
+                    className="mr-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800"
+                    onClick={cartItemAddHandler}
+                  >
                     +
                   </button>
-                  <button className=" ml-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800">
+                  <button
+                    className=" ml-1 w-8 rounded-sm bg-zinc-700 p-1 hover:bg-zinc-800"
+                    onClick={cartItemRemoveHandler}
+                  >
                     -
                   </button>
                 </span>
@@ -79,7 +88,10 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
           </ul>
           <div className="flex justify-between pt-4 ">
             <p className="font-bold text-accent">{`Total payable: ${totalPrice} SEK`}</p>
-            <button className="rounded-sm bg-zinc-800 px-4 hover:bg-zinc-900">
+            <button
+              className="rounded-sm bg-zinc-800 px-4 hover:bg-zinc-900"
+              onClick={clearCartHandler}
+            >
               Clear
             </button>
           </div>

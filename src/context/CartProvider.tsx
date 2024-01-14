@@ -1,18 +1,34 @@
-import { useReducer } from "react";
+import { useReducer, ReactNode } from "react";
 import CartContext from "./cartContext";
+import { Product } from "../App";
 
-const defaultCartState = {
+interface CartState {
+  items: Product[];
+  totalAmount: number;
+}
+
+interface CartAction {
+  type: string;
+  payload?: any;
+  // payload?: Product | number;
+}
+
+interface CartProviderProps {
+  children: ReactNode;
+}
+
+const defaultCartState: CartState = {
   items: [],
   totalAmount: 0,
 };
 
-const cartReducer = (state, action) => {
+const cartReducer = (state: CartState, action: CartAction): CartState => {
   let updatedItems;
 
   switch (action.type) {
     case "ADD":
-      if (state.items.find((item) => item.id === action.payload.id)) {
-        updatedItems = state.items.map((item) =>
+      if (state.items.find((item: Product) => item.id === action.payload.id)) {
+        updatedItems = state.items.map((item: Product) =>
           item.id === action.payload.id
             ? { ...item, amount: item.amount + action.payload.amount }
             : item,
@@ -24,7 +40,8 @@ const cartReducer = (state, action) => {
       return {
         items: updatedItems,
         totalAmount:
-          state.totalAmount + action.payload.amount * action.payload.price,
+          state.totalAmount +
+          (action.payload.amount || 1) * action.payload.price,
       };
     case "REMOVE":
       //todo: change later
@@ -38,20 +55,20 @@ const cartReducer = (state, action) => {
   }
 };
 
-const CartProvider = ({ children }) => {
+const CartProvider = ({ children }: CartProviderProps) => {
   const [cartState, dispatchCartAction] = useReducer(
     cartReducer,
     defaultCartState,
   );
 
-  const addItemToCartHandler = (item) => {
+  const addItemToCartHandler = (item: Product) => {
     dispatchCartAction({
       type: "ADD",
       payload: item,
     });
   };
 
-  const removeItemToCartHandler = (id) => {
+  const removeItemToCartHandler = (id: number) => {
     dispatchCartAction({
       type: "REMOVE",
       payload: id,
