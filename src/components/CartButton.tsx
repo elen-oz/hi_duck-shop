@@ -25,7 +25,6 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
 
       {cartVisibility && (
         <div className="absolute right-0 top-12 z-10 w-[200px]  bg-main p-4 ">
-          <p>Your items:</p>
           <ul>
             {cartItems.map((item) => (
               <li key={item.id} className="pt-2">
@@ -36,7 +35,7 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
               </li>
             ))}
           </ul>
-          <p className="pt-4 font-bold">{`Total Price: ${totalPrice} SEK`}</p>
+          <p className="pt-4 font-bold text-accent">{`Total Price: ${totalPrice} SEK`}</p>
         </div>
       )}
     </div>
