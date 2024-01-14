@@ -1,15 +1,25 @@
 import { useParams } from "react-router-dom";
 import { OnAddHandler, Product } from "../App";
 import AddButton from "../UI/AddButtonA";
+import { useContext } from "react";
+import CartContext from "../context/cartContext";
 
 interface Props {
   items: Product[];
-  onAdd: OnAddHandler;
 }
 
-const ItemPage = ({ items, onAdd }: Props) => {
+const ItemPage = ({ items }: Props) => {
   const { id } = useParams<{ id: string }>();
   const itemId = id ? parseInt(id, 10) : undefined;
+  const cartCtx = useContext(CartContext);
+
+  const addToCartHandler: OnAddHandler = (event, item) => {
+    event.preventDefault();
+
+    if (cartCtx) {
+      cartCtx.addItem({ ...item, amount: 1 });
+    }
+  };
 
   const item = items.find((item) => {
     if (item.id) {
@@ -19,7 +29,7 @@ const ItemPage = ({ items, onAdd }: Props) => {
 
   if (!item) return <div>Item not found</div>;
 
-  const { name, price, description, image, amount } = item;
+  const { name, price, description, image } = item;
 
   return (
     <div className=" flex grid-flow-col grid-rows-2 flex-col items-center justify-center  justify-items-center gap-4 px-4 md:grid">
@@ -34,12 +44,8 @@ const ItemPage = ({ items, onAdd }: Props) => {
       )}
 
       <AddButton
-        id={id}
-        name={name}
-        price={price}
-        image={image}
-        amount={amount}
-        onAdd={(event) => onAdd(event, item)}
+        product={item}
+        onAdd={(event) => addToCartHandler(event, item)}
       >
         + Add to cart
       </AddButton>

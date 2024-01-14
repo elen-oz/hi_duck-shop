@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
+import CartProvider from "./context/CartProvider";
 import { products } from "./data";
 
 import MainWrapperPage from "./pages/MainWrapperPage";
@@ -24,26 +25,7 @@ export type OnAddHandler = (
 const items = products.map((product) => ({ ...product, amount: 0 }));
 
 const App = () => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
   const [isCartVisible, setCartVisibility] = useState(false);
-
-  const handleAddToCart: OnAddHandler = (event, product): void => {
-    event.preventDefault();
-
-    const existingProduct = cartItems.find((item) => item.id === product.id);
-
-    if (existingProduct !== undefined) {
-      setCartItems((prevItems) =>
-        prevItems.map((item) =>
-          item.id === product.id
-            ? { ...item, amount: (item.amount || 0) + 1 }
-            : item,
-        ),
-      );
-    } else {
-      setCartItems((prevItems) => [...prevItems, { ...product, amount: 1 }]);
-    }
-  };
 
   const handleToggleCart = () => {
     setCartVisibility((prevVisibility) => !prevVisibility);
@@ -51,27 +33,22 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <MainWrapperPage
-              cartItems={cartItems}
-              cartVisibility={isCartVisible}
-              onToggleCart={handleToggleCart}
-            />
-          }
-        >
+      <CartProvider>
+        <Routes>
           <Route
-            index
-            element={<ShopPage items={items} onAdd={handleAddToCart} />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ItemPage items={items} onAdd={handleAddToCart} />}
-          />
-        </Route>
-      </Routes>
+            path="/"
+            element={
+              <MainWrapperPage
+                cartVisibility={isCartVisible}
+                onToggleCart={handleToggleCart}
+              />
+            }
+          >
+            <Route index element={<ShopPage items={items} />} />
+            <Route path="/product/:id" element={<ItemPage items={items} />} />
+          </Route>
+        </Routes>
+      </CartProvider>
     </BrowserRouter>
   );
 };
