@@ -1,16 +1,19 @@
 import { useParams } from "react-router-dom";
-import { products } from "../data";
-import { OnAddHandler } from "../App";
+import { OnAddHandler, Product } from "../App";
 
 interface Props {
+  items: Product[];
   onAdd: OnAddHandler;
 }
 
-const ItemPage = ({ onAdd }: Props) => {
-  const { id } = useParams();
+const ItemPage = ({ items, onAdd }: Props) => {
+  const { id } = useParams<{ id: string }>();
+  const itemId = id ? parseInt(id, 10) : undefined;
 
-  const item = products.find((item) => {
-    return item.id === +id;
+  const item = items.find((item) => {
+    if (item.id) {
+      return item.id === itemId;
+    }
   });
 
   if (!item) return <div>Item not found</div>;
@@ -19,8 +22,6 @@ const ItemPage = ({ onAdd }: Props) => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
-    console.log({ id, name, price, image, onAdd });
 
     onAdd(event, item);
   };

@@ -1,24 +1,14 @@
 import { Product, OnAddHandler } from "../App";
 
-// interface Props {
-//   id: number;
-//   name: string;
-//   price: number;
-//   image: string;
-//   description?: string;
-//   onAdd: OnAddHandler;
-// }
-
 type ItemProps = Omit<Product, "description"> & {
   onAdd: OnAddHandler;
 };
 
-const Item = ({ id, name, price, image, onAdd }: ItemProps) => {
+const Item = ({ id, name, price, image, amount, onAdd }: ItemProps) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    console.log({ id, name, price, image, onAdd });
-    onAdd(event, { id, name, price, image });
+    onAdd(event, { id, name, price, image, amount });
   };
 
   return (

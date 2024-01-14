@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
-import Cart from "./Cart";
+import CartButton from "./CartButton";
 import { Product } from "../App";
 
 interface Props {
   cartItems: Product[];
+  cartVisibility: boolean;
+  onToggleCart: () => void;
 }
 
-const Header = ({ cartItems }: Props) => {
+const Header = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
   return (
     <header className="w-full bg-main ">
       <div className="mx-auto flex justify-between px-8 py-4 text-white md:container">
@@ -15,7 +17,11 @@ const Header = ({ cartItems }: Props) => {
             <span className="text-accent">Duck</span> Shop
           </h2>
         </Link>
-        <Cart cartItems={cartItems} />
+        <CartButton
+          cartItems={cartItems}
+          cartVisibility={cartVisibility}
+          onToggleCart={onToggleCart}
+        />
       </div>
     </header>
   );

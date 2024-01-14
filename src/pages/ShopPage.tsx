@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
-import { products } from "../data";
+// import { products } from "../data";
 import Item from "../components/Item";
-import { OnAddHandler } from "../App";
+import { Product, OnAddHandler } from "../App";
 
 interface Props {
+  items: Product[];
   onAdd: OnAddHandler;
 }
 
-const ShopPage = ({ onAdd }: Props) => {
+const ShopPage = ({ items, onAdd }: Props) => {
   return (
     <div className="mx-auto flex max-w-[47rem] flex-wrap justify-center">
-      {products.map((product) => {
-        const { name, price, image, id } = product;
+      {items.map((product) => {
+        const { name, price, image, id, amount } = product;
 
         return (
           <Link to={`/product/${id}`} key={id}>
@@ -20,6 +21,7 @@ const ShopPage = ({ onAdd }: Props) => {
               name={name}
               price={price}
               image={image}
+              amount={amount}
               onAdd={(event) => onAdd(event, product)}
             />
           </Link>

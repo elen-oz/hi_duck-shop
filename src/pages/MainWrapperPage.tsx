@@ -5,12 +5,22 @@ import { Product } from "../App";
 
 interface Props {
   cartItems: Product[];
+  cartVisibility: boolean;
+  onToggleCart: () => void;
 }
 
-const MainWrapperPage = ({ cartItems }: Props) => {
+const MainWrapperPage = ({
+  cartItems,
+  cartVisibility,
+  onToggleCart,
+}: Props) => {
   return (
     <div className="flex h-screen flex-col justify-between">
-      <Header cartItems={cartItems} />
+      <Header
+        cartItems={cartItems}
+        cartVisibility={cartVisibility}
+        onToggleCart={onToggleCart}
+      />
       <Outlet />
       <Footer />
     </div>
