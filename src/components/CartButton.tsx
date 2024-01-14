@@ -7,11 +7,22 @@ interface Props {
 }
 
 const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
+  const totalAmount = cartItems.reduce(
+    (acc, item) => acc + (item.amount || 0),
+    0,
+  );
+
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + (item.amount || 0) * item.price,
+    0,
+  );
+
   return (
     <div className="relative">
       <button className="text-xl" onClick={() => onToggleCart()}>
-        Cart ({cartItems.length})
+        Cart ({totalAmount})
       </button>
+
       {cartVisibility && (
         <div className="absolute right-0 top-12 z-10 w-[200px]  bg-main p-4 ">
           <p>Your items:</p>
@@ -25,6 +36,7 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
               </li>
             ))}
           </ul>
+          <p className="pt-4 font-bold">{`Total Price: ${totalPrice} SEK`}</p>
         </div>
       )}
     </div>
