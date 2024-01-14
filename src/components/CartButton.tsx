@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import classNames from "classnames";
+import CartContext from "../context/cartContext";
 import { Product } from "../App";
 
 interface Props {
@@ -8,6 +10,13 @@ interface Props {
 }
 
 const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
+  const cartCtx = useContext(CartContext);
+
+  //todo: items => cartItems
+  const { items } = cartCtx;
+  console.log("items", items);
+  console.log("cartItems", cartItems);
+
   const totalAmount = cartItems.reduce(
     (acc, item) => acc + (item.amount || 0),
     0,
@@ -19,6 +28,13 @@ const CartButton = ({ cartItems, cartVisibility, onToggleCart }: Props) => {
   );
 
   const toggledCart = cartVisibility ? "text-accentSecond" : "text-white";
+
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
 
   return (
     <div className="relative">

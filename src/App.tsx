@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
+import CartProvider from "./context/CartProvider";
 import { products } from "./data";
 
 import MainWrapperPage from "./pages/MainWrapperPage";
@@ -51,27 +52,29 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <MainWrapperPage
-              cartItems={cartItems}
-              cartVisibility={isCartVisible}
-              onToggleCart={handleToggleCart}
+      <CartProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MainWrapperPage
+                cartItems={cartItems}
+                cartVisibility={isCartVisible}
+                onToggleCart={handleToggleCart}
+              />
+            }
+          >
+            <Route
+              index
+              element={<ShopPage items={items} onAdd={handleAddToCart} />}
             />
-          }
-        >
-          <Route
-            index
-            element={<ShopPage items={items} onAdd={handleAddToCart} />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ItemPage items={items} onAdd={handleAddToCart} />}
-          />
-        </Route>
-      </Routes>
+            <Route
+              path="/product/:id"
+              element={<ItemPage items={items} onAdd={handleAddToCart} />}
+            />
+          </Route>
+        </Routes>
+      </CartProvider>
     </BrowserRouter>
   );
 };
