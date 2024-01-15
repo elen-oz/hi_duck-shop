@@ -2,7 +2,7 @@ import { useContext } from "react";
 import classNames from "classnames";
 import CartContext from "../context/cartContext";
 import { Product } from "../App";
-import Cart from "./Cart";
+import CartList from "./CartList";
 
 interface Props {
   cartVisibility: boolean;
@@ -57,7 +57,7 @@ const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
       </button>
 
       {cartVisibility && (
-        <Cart
+        <CartList
           cartItems={cartItems}
           cartItemAddHandler={cartItemAddHandler}
           cartItemRemoveHandler={cartItemRemoveHandler}

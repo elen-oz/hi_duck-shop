@@ -1,18 +1,37 @@
-// import { useContext } from "react";
-// import CartContext from "../context/cartContext";
-// import { Product } from "../App";
+import { useContext } from "react";
+import CartContext from "../context/cartContext";
+import { Product } from "../App";
 
-// const CartPage = () => {
-//   const cartCtx = useContext(CartContext);
+interface Props {
+  cartVisibility: boolean;
+  onToggleCart: () => void;
+}
 
-//   const cartItems = cartCtx?.items || [];
-//   const totalPrice = cartCtx?.totalAmount || 0;
+const CartPage = ({ cartVisibility, onToggleCart }: Props) => {
+  const cartCtx = useContext(CartContext);
 
-//   const totalQuantity = cartItems.reduce(
-//     (acc, item) => acc + (item.amount || 0),
-//     0,
-//   );
+  const cartItems = cartCtx?.items || [];
+  const totalPrice = cartCtx?.totalAmount || 0;
 
-//   return <div>CartPage</div>;
-// };
-// export default CartPage;
+  const totalQuantity = cartItems.reduce(
+    (acc, item) => acc + (item.amount || 0),
+    0,
+  );
+
+  return (
+    <div>
+      <div className="container">
+        <ul className="mx-auto w-[500px]">
+          <li className="mx-auto  flex justify-between gap-3 border-b text-center">
+            <div>Item</div>
+            <div className="flex w-[200px] justify-between">
+              <div>x Quantity</div>
+              <div>Price</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+export default CartPage;

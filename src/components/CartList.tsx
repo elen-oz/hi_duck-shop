@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Product } from "../App";
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
   totalPrice: number;
 }
 
-const Cart = ({
+const CartList = ({
   cartItems,
   cartItemAddHandler,
   cartItemRemoveHandler,
@@ -53,7 +54,14 @@ const Cart = ({
           Clear
         </button>
       </div>
+
+      <Link
+        to="/cart"
+        className=" mt-4 block w-[100%] bg-zinc-600 text-center text-xl"
+      >
+        Proceed to checkout
+      </Link>
     </div>
   );
 };
-export default Cart;
+export default CartList;
