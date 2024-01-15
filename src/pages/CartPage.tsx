@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import CartContext from "../context/cartContext";
+import { Product } from "../App";
 
 const CartPage = () => {
   const cartCtx = useContext(CartContext);
@@ -8,9 +9,22 @@ const CartPage = () => {
   //   const totalQuantity = cartCtx?.totalQuantity || 0;
   //   const isCartVisible = cartCtx?.isCartVisible || false;
   //   const handleToggleCart = cartCtx?.handleToggleCart;
-  const cartItemAddHandler = cartCtx?.addItem;
-  const cartItemRemoveHandler = cartCtx?.removeItem;
-  const clearCartHandler = cartCtx?.clearCart;
+
+  const cartItemAddHandler = (item: Product) => {
+    if (cartCtx) {
+      cartCtx.addItem({ ...item, amount: 1 });
+    }
+  };
+  const cartItemRemoveHandler = (id: number) => {
+    if (cartCtx) {
+      cartCtx.removeItem(id);
+    }
+  };
+  const clearCartHandler = () => {
+    if (cartCtx) {
+      cartCtx.clearCart();
+    }
+  };
 
   //todo: hide CartList when Page is open
   //todo: <div>x {item.amount}</div> -- doesn't work correctly - NEED TO BE FIXED
@@ -28,11 +42,11 @@ const CartPage = () => {
               <div className="flex w-[120px] justify-between">
                 <div>{item.amount && item.name}</div>
                 {/* todo: doesn't work correctly - NEED TO BE FIXED */}
-                {/* <div>x {item.amount}</div> */}
+                <div>x {item.amount}</div>
               </div>
 
               <div className="flex w-[160px] items-center justify-between">
-                <div>{item.amount && `${item.price * item.amount}`} SEK</div>
+                {item.amount && <div>{item.price * item.amount} SEK</div>}
 
                 <div>
                   <button
