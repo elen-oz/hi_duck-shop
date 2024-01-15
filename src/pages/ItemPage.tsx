@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { OnAddHandler } from "../App";
 import AddButton from "../UI/AddButtonA";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CartContext from "../context/cartContext";
 import useGetProducts from "../hooks/useGetProducts";
 
@@ -10,6 +10,14 @@ const ItemPage = () => {
   const itemId = id ? parseInt(id, 10) : undefined;
   const cartCtx = useContext(CartContext);
   const { items } = useGetProducts();
+
+  const isCartVisible = cartCtx?.isCartVisible;
+  const handleToggleCart = cartCtx?.handleToggleCart;
+  useEffect(() => {
+    if (isCartVisible && handleToggleCart) {
+      handleToggleCart();
+    }
+  }, []);
 
   const addToCartHandler: OnAddHandler = (event, item) => {
     event.preventDefault();

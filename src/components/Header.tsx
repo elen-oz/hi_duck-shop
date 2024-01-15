@@ -1,12 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import CartButton from "./CartButton";
 
-interface Props {
-  cartVisibility: boolean;
-  onToggleCart: () => void;
-}
-
-const Header = ({ cartVisibility, onToggleCart }: Props) => {
+const Header = () => {
   const location = useLocation();
 
   const isHomePagePath = location.pathname.length === 1;
@@ -37,10 +32,7 @@ const Header = ({ cartVisibility, onToggleCart }: Props) => {
             </Link>
           )}
           {isHomePagePath && <div className="w-[125px]"></div>}
-          <CartButton
-            cartVisibility={cartVisibility}
-            onToggleCart={onToggleCart}
-          />
+          <CartButton />
         </div>
       </div>
     </header>

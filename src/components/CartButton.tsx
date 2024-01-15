@@ -3,16 +3,18 @@ import classNames from "classnames";
 import CartContext from "../context/cartContext";
 import CartList from "./CartList";
 
-interface Props {
-  cartVisibility: boolean;
-  onToggleCart: () => void;
-}
-
-const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
+const CartButton = () => {
   const cartCtx = useContext(CartContext);
   const totalQuantity = cartCtx?.totalQuantity || 0;
+  let isCartVisible: boolean = false;
+  let handleToggleCart: () => void = () => {};
 
-  const toggledCart = cartVisibility ? "text-accentSecond" : "text-white";
+  const toggledCart = isCartVisible ? "text-accentSecond" : "text-white";
+
+  if (cartCtx) {
+    isCartVisible = cartCtx.isCartVisible;
+    handleToggleCart = cartCtx.handleToggleCart;
+  }
 
   return (
     <div className="relative">
@@ -27,12 +29,12 @@ const CartButton = ({ cartVisibility, onToggleCart }: Props) => {
           "ease-in-out",
           toggledCart,
         )}
-        onClick={() => onToggleCart()}
+        onClick={() => handleToggleCart()}
       >
         Cart ({totalQuantity})
       </button>
 
-      {cartVisibility && <CartList />}
+      {isCartVisible && <CartList />}
     </div>
   );
 };
