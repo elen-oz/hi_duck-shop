@@ -1,14 +1,12 @@
 import { useContext } from "react";
 import CartContext from "../context/cartContext";
 import { Product } from "../App";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const cartCtx = useContext(CartContext);
   const cartItems = cartCtx?.items || [];
   const totalPrice = cartCtx?.totalAmount || 0;
-  //   const totalQuantity = cartCtx?.totalQuantity || 0;
-  //   const isCartVisible = cartCtx?.isCartVisible || false;
-  //   const handleToggleCart = cartCtx?.handleToggleCart;
 
   const cartItemAddHandler = (item: Product) => {
     if (cartCtx) {
@@ -26,12 +24,17 @@ const CartPage = () => {
     }
   };
 
-  //todo: hide CartList when Page is open
-  //todo: <div>x {item.amount}</div> -- doesn't work correctly - NEED TO BE FIXED
-
   return (
     <div>
       <div className="container mx-auto w-[500px]">
+        <div className="mb-2 text-right">
+          <button
+            className="rounded-sm bg-zinc-300 px-4 hover:bg-zinc-400"
+            onClick={clearCartHandler}
+          >
+            Clear
+          </button>
+        </div>
         <ul className="mx-auto">
           {cartItems.length === 0 && <p>Cart is empty</p>}
           {cartItems.map((item) => (
@@ -41,7 +44,6 @@ const CartPage = () => {
             >
               <div className="flex w-[120px] justify-between">
                 <div>{item.amount && item.name}</div>
-                {/* todo: doesn't work correctly - NEED TO BE FIXED */}
                 <div>x {item.amount}</div>
               </div>
 
@@ -67,14 +69,15 @@ const CartPage = () => {
           ))}
         </ul>
 
-        <div className="flex justify-between pt-4 ">
-          <p className="font-bold text-accent">{`Total payable: ${totalPrice} SEK`}</p>
-          <button
-            className="rounded-sm bg-zinc-300 px-4 hover:bg-zinc-400"
+        <div className="flex justify-between pt-4">
+          <p className="font-bold text-accentSecond">{`Total payable: ${totalPrice} SEK`}</p>
+          <Link
+            to="/checkout"
+            className="rounded-sm bg-zinc-300 px-5 font-bold hover:bg-zinc-400"
             onClick={clearCartHandler}
           >
-            Clear
-          </button>
+            BUY
+          </Link>
         </div>
       </div>
     </div>
