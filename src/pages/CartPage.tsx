@@ -1,13 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import CartContext from "../context/cartContext";
 
 const CartPage = () => {
   const cartCtx = useContext(CartContext);
   const cartItems = cartCtx?.items || [];
   const totalPrice = cartCtx?.totalAmount || 0;
-  const totalQuantity = cartCtx?.totalQuantity || 0;
-  const isCartVisible = cartCtx?.isCartVisible || false;
-  const handleToggleCart = cartCtx?.handleToggleCart;
+  //   const totalQuantity = cartCtx?.totalQuantity || 0;
+  //   const isCartVisible = cartCtx?.isCartVisible || false;
+  //   const handleToggleCart = cartCtx?.handleToggleCart;
   const cartItemAddHandler = cartCtx?.addItem;
   const cartItemRemoveHandler = cartCtx?.removeItem;
   const clearCartHandler = cartCtx?.clearCart;
@@ -37,13 +37,13 @@ const CartPage = () => {
                 <div>
                   <button
                     className="mr-1 w-8 rounded-sm bg-zinc-200 hover:bg-zinc-400"
-                    onClick={() => cartItemAddHandler(item)}
+                    onClick={() => cartItemAddHandler?.(item)}
                   >
                     +
                   </button>
                   <button
                     className=" ml-1 w-8 rounded-sm bg-zinc-200  hover:bg-zinc-400"
-                    onClick={() => cartItemRemoveHandler(item.id)}
+                    onClick={() => cartItemRemoveHandler?.(item.id)}
                   >
                     -
                   </button>
