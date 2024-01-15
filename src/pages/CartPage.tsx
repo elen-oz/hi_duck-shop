@@ -3,41 +3,65 @@ import CartContext from "../context/cartContext";
 
 const CartPage = () => {
   const cartCtx = useContext(CartContext);
-
-  //   let isCartVisible: boolean = false;
-  //   let handleToggleCart: () => void = () => {};
-
-  //   if (cartCtx) {
-  //     isCartVisible = cartCtx.isCartVisible;
-  //     handleToggleCart = cartCtx.handleToggleCart;
-  //   }
-
-  //todo: hide CartList when Page is open
-
-  const isCartVisible = cartCtx?.isCartVisible || false;
-  const handleToggleCart = cartCtx?.handleToggleCart;
-
   const cartItems = cartCtx?.items || [];
   const totalPrice = cartCtx?.totalAmount || 0;
   const totalQuantity = cartCtx?.totalQuantity || 0;
+  const isCartVisible = cartCtx?.isCartVisible || false;
+  const handleToggleCart = cartCtx?.handleToggleCart;
+  const cartItemAddHandler = cartCtx?.addItem;
+  const cartItemRemoveHandler = cartCtx?.removeItem;
+  const clearCartHandler = cartCtx?.clearCart;
 
-  //   const totalQuantity = cartItems.reduce(
-  //     (acc, item) => acc + (item.amount || 0),
-  //     0,
-  //   );
+  //todo: hide CartList when Page is open
+  //todo: <div>x {item.amount}</div> -- doesn't work correctly - NEED TO BE FIXED
 
   return (
     <div>
-      <div className="container">
-        <ul className="mx-auto w-[500px]">
-          <li className="mx-auto  flex justify-between gap-3 border-b text-center">
-            <div>Item</div>
-            <div className="flex w-[200px] justify-between">
-              <div>x Quantity</div>
-              <div>Price</div>
-            </div>
-          </li>
+      <div className="container mx-auto w-[500px]">
+        <ul className="mx-auto">
+          {cartItems.length === 0 && <p>Cart is empty</p>}
+          {cartItems.map((item) => (
+            <li
+              key={item.id}
+              className="flex items-center justify-between border-b py-1"
+            >
+              <div className="flex w-[120px] justify-between">
+                <div>{item.amount && item.name}</div>
+                {/* todo: doesn't work correctly - NEED TO BE FIXED */}
+                {/* <div>x {item.amount}</div> */}
+              </div>
+
+              <div className="flex w-[160px] items-center justify-between">
+                <div>{item.amount && `${item.price * item.amount}`} SEK</div>
+
+                <div>
+                  <button
+                    className="mr-1 w-8 rounded-sm bg-zinc-200 hover:bg-zinc-400"
+                    onClick={() => cartItemAddHandler(item)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className=" ml-1 w-8 rounded-sm bg-zinc-200  hover:bg-zinc-400"
+                    onClick={() => cartItemRemoveHandler(item.id)}
+                  >
+                    -
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
         </ul>
+
+        <div className="flex justify-between pt-4 ">
+          <p className="font-bold text-accent">{`Total payable: ${totalPrice} SEK`}</p>
+          <button
+            className="rounded-sm bg-zinc-300 px-4 hover:bg-zinc-400"
+            onClick={clearCartHandler}
+          >
+            Clear
+          </button>
+        </div>
       </div>
     </div>
   );

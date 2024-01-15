@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { OnAddHandler, Product } from "../App";
+import { OnAddHandler } from "../App";
 import AddButton from "../UI/AddButtonA";
 import { useContext } from "react";
 import CartContext from "../context/cartContext";

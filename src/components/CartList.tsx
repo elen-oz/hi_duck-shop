@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../context/cartContext";
+import { Product } from "../App";
 
 const CartList = () => {
   const cartCtx = useContext(CartContext);
@@ -24,7 +25,7 @@ const CartList = () => {
     }
   };
   return (
-    <div className="absolute right-0 top-12 z-10 w-[330px] rounded-sm  bg-main p-4 ">
+    <div className="absolute right-0 top-12 z-10 w-[330px] rounded-sm  bg-main p-4">
       <ul>
         {cartItems.length === 0 && <p>Cart is empty</p>}
         {cartItems.map((item) => (

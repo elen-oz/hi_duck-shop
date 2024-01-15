@@ -1,8 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import CartProvider from "./context/CartProvider";
-import useGetProducts from "./hooks/useGetProducts";
-
 import MainWrapperPage from "./pages/MainWrapperPage";
 import ShopPage from "./pages/ShopPage";
 import ItemPage from "./pages/ItemPage";
