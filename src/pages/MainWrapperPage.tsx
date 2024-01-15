@@ -1,16 +1,22 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useContext } from "react";
+import CartContext from "../context/cartContext";
 
-interface Props {
-  cartVisibility: boolean;
-  onToggleCart: () => void;
-}
+const MainWrapperPage = () => {
+  const cartCtx = useContext(CartContext);
+  let isCartVisible: boolean = false;
+  let handleToggleCart: () => void = () => {};
 
-const MainWrapperPage = ({ cartVisibility, onToggleCart }: Props) => {
+  if (cartCtx) {
+    isCartVisible = cartCtx.isCartVisible;
+    handleToggleCart = cartCtx.handleToggleCart;
+  }
+
   return (
     <div className="flex h-screen flex-col justify-between">
-      <Header cartVisibility={cartVisibility} onToggleCart={onToggleCart} />
+      <Header cartVisibility={isCartVisible} onToggleCart={handleToggleCart} />
       <Outlet />
       <Footer />
     </div>

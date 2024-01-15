@@ -3,15 +3,13 @@ import { OnAddHandler, Product } from "../App";
 import AddButton from "../UI/AddButtonA";
 import { useContext } from "react";
 import CartContext from "../context/cartContext";
+import useGetProducts from "../hooks/useGetProducts";
 
-interface Props {
-  items: Product[];
-}
-
-const ItemPage = ({ items }: Props) => {
+const ItemPage = () => {
   const { id } = useParams<{ id: string }>();
   const itemId = id ? parseInt(id, 10) : undefined;
   const cartCtx = useContext(CartContext);
+  const { items } = useGetProducts();
 
   const addToCartHandler: OnAddHandler = (event, item) => {
     event.preventDefault();

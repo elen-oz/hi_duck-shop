@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
 
 import CartProvider from "./context/CartProvider";
 import useGetProducts from "./hooks/useGetProducts";
@@ -24,40 +23,14 @@ export type OnAddHandler = (
 ) => void;
 
 const App = () => {
-  const [isCartVisible, setCartVisibility] = useState(false);
-
-  const { products } = useGetProducts();
-
-  const items = products.map((product) => ({ ...product, amount: 0 }));
-
-  const handleToggleCart = () => {
-    setCartVisibility((prevVisibility) => !prevVisibility);
-  };
-
   return (
     <BrowserRouter>
       <CartProvider>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <MainWrapperPage
-                cartVisibility={isCartVisible}
-                onToggleCart={handleToggleCart}
-              />
-            }
-          >
-            <Route index element={<ShopPage items={items} />} />
-            <Route path="/product/:id" element={<ItemPage items={items} />} />
-            <Route
-              path="/cart"
-              element={
-                <CartPage
-                  cartVisibility={isCartVisible}
-                  onToggleCart={handleToggleCart}
-                />
-              }
-            />
+          <Route path="/" element={<MainWrapperPage />}>
+            <Route index element={<ShopPage />} />
+            <Route path="/product/:id" element={<ItemPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Route>
         </Routes>
       </CartProvider>

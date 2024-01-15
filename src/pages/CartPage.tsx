@@ -1,14 +1,15 @@
 import { useContext } from "react";
 import CartContext from "../context/cartContext";
-import { Product } from "../App";
 
-interface Props {
-  cartVisibility: boolean;
-  onToggleCart: () => void;
-}
-
-const CartPage = ({ cartVisibility, onToggleCart }: Props) => {
+const CartPage = () => {
   const cartCtx = useContext(CartContext);
+  let isCartVisible: boolean = false;
+  let handleToggleCart: () => void = () => {};
+
+  if (cartCtx) {
+    isCartVisible = cartCtx.isCartVisible;
+    handleToggleCart = cartCtx.handleToggleCart;
+  }
 
   const cartItems = cartCtx?.items || [];
   const totalPrice = cartCtx?.totalAmount || 0;

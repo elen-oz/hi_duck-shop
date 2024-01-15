@@ -7,6 +7,8 @@ interface CartContextType {
   addItem: (item: Product) => void;
   removeItem: (id: number) => void;
   clearCart: () => void;
+  isCartVisible: boolean;
+  handleToggleCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);

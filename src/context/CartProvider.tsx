@@ -1,4 +1,4 @@
-import { useReducer, ReactNode } from "react";
+import { useReducer, ReactNode, useState } from "react";
 import CartContext from "./cartContext";
 import { Product } from "../App";
 
@@ -77,6 +77,11 @@ const CartProvider = ({ children }: CartProviderProps) => {
     cartReducer,
     defaultCartState,
   );
+  const [isCartVisible, setCartVisibility] = useState(false);
+
+  const handleToggleCart = () => {
+    setCartVisibility((prevVisibility) => !prevVisibility);
+  };
 
   const addItemToCartHandler = (item: Product) => {
     dispatchCartAction({
@@ -102,6 +107,8 @@ const CartProvider = ({ children }: CartProviderProps) => {
     addItem: addItemToCartHandler,
     removeItem: removeItemToCartHandler,
     clearCart: clearCartHandler,
+    isCartVisible: isCartVisible,
+    handleToggleCart,
   };
 
   return (
