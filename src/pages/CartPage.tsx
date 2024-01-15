@@ -69,8 +69,21 @@ const CartPage = () => {
           ))}
         </ul>
 
+        {/* <p>
+        {name} - <span className="font-semibold text-red-500">{price}</span>
+        &nbsp;
+        <span className="line-through">&nbsp;{Math.floor(price * 1.1)}</span>
+        &nbsp;SEK
+      </p> */}
+
         <div className="flex justify-between pt-4">
-          <p className="font-bold text-accentSecond">{`Total payable: ${totalPrice} SEK`}</p>
+          <p className="font-bold text-accentSecond">
+            Total payable:{" "}
+            <span className="font-normal text-black line-through">
+              {Math.floor(totalPrice * 1.1)}
+            </span>
+            &nbsp;{totalPrice}&nbsp;SEK
+          </p>
           <Link
             to="/checkout"
             className="rounded-sm bg-zinc-300 px-5 font-bold hover:bg-zinc-400"

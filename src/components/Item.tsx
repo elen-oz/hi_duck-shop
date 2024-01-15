@@ -26,8 +26,11 @@ const Item = ({ product }: ItemProps) => {
         src={image}
         alt={name}
       />
-      <p className="">
-        {name} - {price} SEK
+      <p>
+        {name} - <span className="font-semibold text-red-500">{price}</span>
+        &nbsp;
+        <span className="line-through">{Math.floor(price * 1.1)}</span>
+        &nbsp;SEK
       </p>
 
       <AddButton
