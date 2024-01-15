@@ -1,23 +1,30 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CartContext from "../context/cartContext";
 
 const CartPage = () => {
   const cartCtx = useContext(CartContext);
-  let isCartVisible: boolean = false;
-  let handleToggleCart: () => void = () => {};
 
-  if (cartCtx) {
-    isCartVisible = cartCtx.isCartVisible;
-    handleToggleCart = cartCtx.handleToggleCart;
-  }
+  //   let isCartVisible: boolean = false;
+  //   let handleToggleCart: () => void = () => {};
+
+  //   if (cartCtx) {
+  //     isCartVisible = cartCtx.isCartVisible;
+  //     handleToggleCart = cartCtx.handleToggleCart;
+  //   }
+
+  //todo: hide CartList when Page is open
+
+  const isCartVisible = cartCtx?.isCartVisible || false;
+  const handleToggleCart = cartCtx?.handleToggleCart;
 
   const cartItems = cartCtx?.items || [];
   const totalPrice = cartCtx?.totalAmount || 0;
+  const totalQuantity = cartCtx?.totalQuantity || 0;
 
-  const totalQuantity = cartItems.reduce(
-    (acc, item) => acc + (item.amount || 0),
-    0,
-  );
+  //   const totalQuantity = cartItems.reduce(
+  //     (acc, item) => acc + (item.amount || 0),
+  //     0,
+  //   );
 
   return (
     <div>

@@ -5,6 +5,7 @@ import { Product } from "../App";
 interface CartState {
   items: Product[];
   totalAmount: number;
+  totalQuantity: number;
 }
 
 interface CartAction {
@@ -19,12 +20,14 @@ interface CartProviderProps {
 const defaultCartState: CartState = {
   items: [],
   totalAmount: 0,
+  totalQuantity: 0,
 };
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   let updatedItems;
   let itemToRemove;
   let updatedAmount: number;
+  // let updatedQuantity: number;
 
   switch (action.type) {
     case "ADD":
@@ -43,6 +46,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
         totalAmount:
           state.totalAmount +
           (action.payload.amount || 1) * action.payload.price,
+        totalQuantity: state.totalQuantity + 1,
       };
     case "REMOVE":
       itemToRemove = state.items.find((item) => item.id === action.payload);
@@ -60,6 +64,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
         return {
           items: updatedItems,
           totalAmount: state.totalAmount - itemToRemove.price,
+          totalQuantity: state.totalQuantity - 1,
         };
       }
       return state;
@@ -101,9 +106,15 @@ const CartProvider = ({ children }: CartProviderProps) => {
     dispatchCartAction({ type: "CLEAR" });
   };
 
+  // const totalQuantity = cartItems.reduce(
+  //   (acc, item) => acc + (item.amount || 0),
+  //   0,
+  // );
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
+    totalQuantity: cartState.totalQuantity,
     addItem: addItemToCartHandler,
     removeItem: removeItemToCartHandler,
     clearCart: clearCartHandler,

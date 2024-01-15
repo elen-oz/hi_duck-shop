@@ -1,21 +1,28 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Product } from "../App";
+import CartContext from "../context/cartContext";
 
-interface Props {
-  cartItems: Product[];
-  cartItemAddHandler: (item: Product) => void;
-  cartItemRemoveHandler: (id: number) => void;
-  clearCartHandler: () => void;
-  totalPrice: number;
-}
+const CartList = () => {
+  const cartCtx = useContext(CartContext);
 
-const CartList = ({
-  cartItems,
-  cartItemAddHandler,
-  cartItemRemoveHandler,
-  clearCartHandler,
-  totalPrice,
-}: Props) => {
+  const cartItems = cartCtx?.items || [];
+  const totalPrice = cartCtx?.totalAmount || 0;
+
+  const cartItemAddHandler = (item: Product) => {
+    if (cartCtx) {
+      cartCtx.addItem({ ...item, amount: 1 });
+    }
+  };
+  const cartItemRemoveHandler = (id: number) => {
+    if (cartCtx) {
+      cartCtx.removeItem(id);
+    }
+  };
+  const clearCartHandler = () => {
+    if (cartCtx) {
+      cartCtx.clearCart();
+    }
+  };
   return (
     <div className="absolute right-0 top-12 z-10 w-[330px] rounded-sm  bg-main p-4 ">
       <ul>

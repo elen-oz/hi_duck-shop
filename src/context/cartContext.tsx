@@ -9,6 +9,7 @@ interface CartContextType {
   clearCart: () => void;
   isCartVisible: boolean;
   handleToggleCart: () => void;
+  totalQuantity: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
