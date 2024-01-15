@@ -4,7 +4,7 @@ import MainWrapperPage from "./pages/MainWrapperPage";
 import ShopPage from "./pages/ShopPage";
 import ItemPage from "./pages/ItemPage";
 import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CheckoutPage";
+import PaymentPage from "./pages/PaymentPage";
 
 export interface Product {
   id: number;
@@ -29,7 +29,7 @@ const App = () => {
             <Route index element={<ShopPage />} />
             <Route path="/product/:id" element={<ItemPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/checkout" element={<PaymentPage />} />
           </Route>
         </Routes>
       </CartProvider>
