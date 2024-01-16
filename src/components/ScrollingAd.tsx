@@ -1,5 +1,3 @@
-import "../styles/ScrollingAd.css";
-
 const ScrollingAd = () => {
   console.log("ScrollingAd");
 
