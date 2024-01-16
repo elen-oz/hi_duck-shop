@@ -23,7 +23,7 @@ cd hi_duck-shop
 3. Install the required dependencies:
 
 ```
-bun install
+npm install
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ bun install
 To run the application in development mode, use the command:
 
 ```
-bun run start
+npm run start
 ```
 
 This will start the application on `localhost:5173`.
