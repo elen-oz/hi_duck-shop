@@ -28,7 +28,7 @@ npm install
 
 ## Usage
 
-To run the application in development mode, use the command:
+**To run** the application in development mode, use the command:
 
 ```
 npm run start
